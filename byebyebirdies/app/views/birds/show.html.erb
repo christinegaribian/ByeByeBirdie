@@ -1,0 +1,52 @@
+<h1>  <%= @bird.name %> </h1>
+<br>
+
+<img src="https://lafeber.com/pet-birds/wp-content/uploads/iStock_5307869green-cheeck-conure.jpg">
+
+<br>
+
+<table>
+  <tr>
+    <td>Name:</td>
+    <td><%= @bird.name %></td>
+  </tr>
+  <tr>
+    <td>Age:</td>
+    <td><%= @bird.age %></td>
+  </tr>
+  <tr>
+    <td>Color:</td>
+    <td><%= @bird.color %></td>
+  </tr>
+  <tr>
+    <td>Sex:</td>
+    <td><%= @bird.sex %></td>
+  </tr>
+  <tr>
+    <td>Description: </td>
+    <td><%= @bird.description %></td>
+  </tr>
+</table>
+
+<br>
+
+<% requests = @bird.bird_rental_requests.order('start_date ASC') %>
+<table>
+  <tr>
+    <th>Start Date</th>
+    <th>End Date</th>
+  </tr>
+  <% requests.each do |request| %>
+  <tr>
+    <td> <%= request.start_date %> </td>
+    <td> <%= request.end_date %> </td>
+  </tr>
+  <% end %>
+</table>
+
+<%= link_to "Edit Bird", edit_bird_url %>
+
+<br>
+<br>
+<br>
+<footer> <%= link_to "FLOCKPAGE", birds_url %> </footer>

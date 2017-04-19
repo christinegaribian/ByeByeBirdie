@@ -1,0 +1,10 @@
+<h1>The Whole Flock</h1>
+
+<ul>
+  <% @birds.each do |bird| %>
+    <%= render bird %>
+    <%= link_to "Quack me out", bird_url(bird) %>
+    <% end %>
+</ul>
+
+<%= link_to "Add Bird", new_bird_url %>

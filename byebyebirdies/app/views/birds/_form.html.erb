@@ -1,0 +1,50 @@
+<% action_url = (action == :edit ? bird_url : birds_url) %>
+
+<form action="<%= action_url %>" method="post">
+  <% if action == :edit %>
+    <input type="hidden" name="_method" value="PATCH">
+  <% end %>
+
+  <label for="name">Name:</label>
+  <input id="name" type="text" name="bird[name]" value="<%= action == :edit ? @bird.name : "" %>">
+
+  <br>
+  <br>
+
+  <label for="sex">Sex:</label>
+  <input id="sex" type="radio" name="bird[sex]" value="M" <%= "M" == @bird.sex ? "checked" : "" %>> Male
+  <input id="sex" type="radio" name="bird[sex]" value="F" <%= "F" == @bird.sex ? "checked" : "" %>> Female
+
+  <br>
+  <br>
+
+  <label for="color">Color:</label>
+  <select id="color" name="bird[color]">
+    <option disabled <%= action == :edit ? "" : "selected" %> >
+      -- Please Select --
+    </option>
+
+    <% Bird::COLORS.each do |color| %>
+      <option id="color" value="<%= color %>" <%= color == @bird.color ? "selected" : "" %> ><%= color %></option>
+    <% end %>
+  </select>
+
+  <br>
+  <br>
+
+  <label for="birth_date">Birth Date:</label>
+  <input id="birth_date" type="date" name="bird[birth_date]"
+  value =  "<%= @bird.birth_date %>" >
+
+  <br>
+  <br>
+
+  <label for="description">Description:</label>
+  <textarea id="description" name="bird[description]"> <%= @bird.description %> </textarea>
+
+  <br>
+  <br>
+
+  <input type="submit" value="<%= action == :edit ? "Edit Bird" : "Add Bird" %>">
+
+</form>
