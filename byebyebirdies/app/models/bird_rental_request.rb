@@ -45,7 +45,7 @@ class BirdRentalRequest < ApplicationRecord
   def approve!
     ActiveRecord::Base.transaction do
       self.status = "APPROVED"
-      self.update_attributes
+      self.save
       overlapping_pending_requests.each { |request| request.deny! }
     end
   end
