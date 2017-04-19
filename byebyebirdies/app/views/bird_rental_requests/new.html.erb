@@ -1,0 +1,35 @@
+
+
+<form action="/bird_rental_requests" method="post">
+
+  <label for="bird_id">Bird's Name:</label>
+  <select id="bird_id" name="request[bird_id]">
+    <option disabled selected >
+      -- Please Select --
+    </option>
+
+    <% Bird.all.each do |bird| %>
+      <option id="bird_id" value="<%= bird.id %>" ><%= bird.name %></option>
+    <% end %>
+  </select>
+
+  <br>
+  <br>
+
+  <label for="start_date">Start Date:</label>
+  <input id="start_date" type="date" name="request[start_date]"
+  value =  "<%= @request.start_date %>" >
+
+  <br>
+  <br>
+
+  <label for="end_date">End Date:</label>
+  <input id="end_date" type="date" name="request[end_date]"
+  value =  "<%= @request.end_date %>" >
+
+  <br>
+  <br>
+
+  <input type="submit" value="Submit Birdquest">
+
+</form>

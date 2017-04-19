@@ -33,7 +33,26 @@ class BirdRentalRequest < ApplicationRecord
       .where(status: "APPROVED")
   end
 
+  def overlapping_pending_requests
+    overlapping_requests
+      .where(status: "PENDING")
+  end
+
   def does_not_overlap_approved_request
     errors[:overlap] << "Overlapping Request" if overlapping_approved_requests.exists?
   end
+
+  def approve!
+    ActiveRecord::Base.transaction do
+      self.status = "APPROVED"
+      self.update_attributes
+      overlapping_pending_requests.each { |request| request.deny! }
+    end
+  end
+
+  def deny!
+    self.status = "DENIED"
+    self.update_attributes
+  end
+
 end

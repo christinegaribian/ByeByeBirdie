@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
 
   resources :birds
-  resources :bird_rental_requests, only: [:new, :create, :index, :show]
+  resources :bird_rental_requests, only: [:new, :create]
 end

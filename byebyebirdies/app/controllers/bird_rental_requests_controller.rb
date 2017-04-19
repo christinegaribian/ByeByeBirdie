@@ -1,13 +1,4 @@
 class BirdRentalRequestsController < ApplicationController
-
-  def index
-     @requests = BirdRentalRequest.all
-  end
-
-  def show
-    @request = BirdRentalRequest.find(params[:id])
-  end
-
   def new
     @request = BirdRentalRequest.new
   end
@@ -16,7 +7,7 @@ class BirdRentalRequestsController < ApplicationController
     @request = BirdRentalRequest.new(bird_rental_request_params)
 
     if @request.save
-      redirect_to bird_rental_requests_url(@request)
+      redirect_to bird_url(@request.bird)
     else
       render :new
     end
@@ -24,6 +15,6 @@ class BirdRentalRequestsController < ApplicationController
 
   private
   def bird_rental_request_params
-    params.require(:bird_rental_requests).permit(:start_date, :end_date, :bird_id)
+    params.require(:request).permit(:start_date, :end_date, :bird_id)
   end
 end
